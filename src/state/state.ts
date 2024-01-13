@@ -12,6 +12,7 @@ import { create } from "zustand"
   
   }
   
+  
   export interface Investor extends User{
     
   }
@@ -30,7 +31,7 @@ import { create } from "zustand"
     setCompanyName:(companyName:string)=>set({companyName}),
     setDescription:(description:string)=>set({description}),
     setPublicShares:(publicShares:number)=>set({publicShares}),
-    setLeglDoc:(legalDoc:File)=>set({legalDoc}),
+    setLegalDoc:(legalDoc:File)=>set({legalDoc}),
     setBusinessInfoDoc:(businessInfoDoc:File)=>set({businessInfoDoc})
 
    

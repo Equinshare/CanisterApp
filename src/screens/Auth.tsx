@@ -125,7 +125,7 @@ export default function Auth(): JSX.Element {
          // disabled={acctype == "" ? true : false}
           className="signin"
           onClick={ ()=>{
-
+navigation("onBoarding")
 
            signIn().then((data)=>{
             navigation("onBoarding")

@@ -12,14 +12,32 @@ import "../../styles/components/auth/profile.scss";
 import { useCreateCompany } from "../../state/state";
 
 export const CompanyProfile = (): JSX.Element => {
-const {setCompanyName, setCompanyDescription,setFiles,setPublicShares, setLegalDoc,setBusinessInfoDoc, setValuePerShare}=useCreateCompany((state:any)=>state)
+const {setCompanyName, setCompanyDescription,setFiles,setPublicShares, setValuePerShare, setLegalDoc,setBusinessInfoDoc,
+companyName,
+description,
+legalDoc,
+businessInfoDoc,
+publicShares
+
+
+
+}=useCreateCompany((state:any)=>state)
+
+
+const fileHandler=(e)=>{
+  const reader= new FileReader();
+  reader.onload=()=>{
+    if(reader.readyState===2)setBusinessInfoDoc(reader.result)
+  };
+
+}
   return (
     <div className="companyprofile">
       <span className="top">
         <p className="title">Create your company profile</p>
         <div className="divider" />
       </span>
-       
+
       <input
         type="text"
         className="companyname"
@@ -39,32 +57,38 @@ const {setCompanyName, setCompanyDescription,setFiles,setPublicShares, setLegalD
         </span>
 
         <textarea name="description" 
-         OnChange={(e) =>{
+        onChange={(e)=>{
           setCompanyDescription(e.target.value)
-
-         }}
+        }}
         />
       </span>
 
       <p className="title">Documents</p>
       <div className="files">
-        <span>
-          <input type="file" className="title"
-          onChange={ (e)  =>{
-            setLegalDoc(e.target.files[0])
+        <label  htmlFor="legal-doc">
+          <p className="title">Legal information</p>
+          <input id="legal-doc" name="legal-doc" type="file" hidden
+          onChange={(e)=>{
+fileHandler(e)
           }}
-          > Legal Information </input>
-          <UploadIcon />
-        </span>
+          >
+     
+          </input>
+          <UploadIcon/>
+         
+        </label>
 
-        <span>
-          <input type="file" className="title" 
-          onChange={ (e) =>{
-            setBusinessInfoDoc(e.target.files[0])
-          }}
-          >Business information</input>
-          <UploadIcon />
-        </span>
+        <label htmlFor="bsn-doc">
+          <p className="title">Business information</p>
+          <input id="bsn-doc" name="bsn-doc" hidden type="file" onChange={(e)=>{
+fileHandler(e)
+
+          }} >
+        
+          </input>
+          <UploadIcon/>
+          
+        </label>
       </div>
 
       <p className="title">Share distribution</p>
@@ -75,9 +99,11 @@ const {setCompanyName, setCompanyDescription,setFiles,setPublicShares, setLegalD
             <PublicIcon />
           </span>
 
-          <input placeholder="1000000" type="number" maxLength={3} 
-          onChange={ (e) =>{
-             setPublicShares(e.target.value)
+          <input placeholder="1000000" type="number" maxLength={12}
+          
+          onChange={(e)=>{
+            setPublicShares(e?.target.value)
+
           }}
           />
         </div>
@@ -89,14 +115,19 @@ const {setCompanyName, setCompanyDescription,setFiles,setPublicShares, setLegalD
           </span>
 
           <input placeholder="1000000" type="number" maxLength={12} 
-          onChange={ (e) =>{
-            setValuePerShare(e.target.value)
+          
+          onChange={(e)=>{
+setValuePerShare(e.target.value)
           }}
           />
         </div>
       </div>
 
-      <button className="submit">
+      <button className="submit"
+      onClick={()=>{
+       
+      }}
+      >
         <p>Get started</p>
         <ArrowIcon />
       </button>
