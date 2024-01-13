@@ -1,4 +1,5 @@
 import {
+  
   ic,
   $query,
   $update,
@@ -24,12 +25,19 @@ import {
 
 import { Investor, Company } from "./types";
 
-// maps
-const users = new StableBTreeMap<Principal, User>(0, 50, 500);
-const proposals = new StableBTreeMap<ProposalId, Proposal>(1, 100, 1_000);
+const companies = new StableBTreeMap<text, Company>(0, 50, 500);
+const investors= new StableBTreeMap<text, Investor>(0,0,50);
+
+
 
 $query;
 export function getUserById(id: Principal): Opt<User> {
   return users.get(id);
+}
+$update;
+
+export function onBoardCompany(compny:Company):any{
+
+
 }
 
