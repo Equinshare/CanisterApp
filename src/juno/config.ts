@@ -10,7 +10,7 @@ const document_key = nanoid();
 export const initilizeJuno=async ()=>{
 
     await initJuno({
-        satelliteId: "pjadv-laaaa-aaaal-adm2q-cai",
+        satelliteId: "oeoh3-eiaaa-aaaal-adm5a-cai",
       });
 
 }
