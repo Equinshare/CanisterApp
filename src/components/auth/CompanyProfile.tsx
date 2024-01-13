@@ -1,5 +1,4 @@
 import { JSX } from "react";
-import { useCreateCompany } from "../../state/state";
 import {
   ArrowIcon,
   ParagraphIcon,
@@ -7,42 +6,32 @@ import {
   UploadIcon,
   CheckIcon,
 } from "../../assets/icons";
+
+import { colors } from "../../assets/colors";
 import "../../styles/components/auth/profile.scss";
+import { useCreateCompany } from "../../state/state";
+import { createCompany } from "../../juno/config";
 
 export const CompanyProfile = (): JSX.Element => {
-  const {
-    setCompanyName,
-    setDescription,
-    setPublicShares,
-    setValuePerShare,
-    setLegalDoc,
-    setBusinessInfoDoc,
-    companyName,
-    description,
-    legalDoc,
-    businessInfoDoc,
-    publicShares,
-    valuePerShare,
-  } = useCreateCompany((state: any) => state);
+const {setCompanyName, setCompanyDescription,setFiles,setPublicShares, setValuePerShare, setLegalDoc,setBusinessInfoDoc,
+companyName,
+description,
+legalDoc,
+businessInfoDoc,
+publicShares
 
-  const legalfileHandler = (e) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      if (reader.readyState === 2) console.log(reader.result);
-    };
-    reader.readAsDataURL(e.target.files[0]);
-    setLegalDoc(e.target.files[0]);
+
+
+}=useCreateCompany((state:any)=>state)
+
+
+const fileHandler=(e)=>{
+  const reader= new FileReader();
+  reader.onload=()=>{
+    if(reader.readyState===2)setBusinessInfoDoc(reader.result)
   };
 
-  const bnsfileHandler = (e) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      if (reader.readyState === 2) console.log(reader.result);
-    };
-    reader.readAsDataURL(e.target.files[0]);
-    setBusinessInfoDoc(e.target.files[0]);
-  };
-
+}
   return (
     <div className="companyprofile">
       <span className="top">
@@ -55,8 +44,9 @@ export const CompanyProfile = (): JSX.Element => {
         className="companyname"
         placeholder="Company name"
         max={128}
-        onChange={(e) => {
-          setCompanyName(e.target.value);
+        onChange={(e)=>{
+          setCompanyName(e.target.value)
+
         }}
       />
 
@@ -67,40 +57,38 @@ export const CompanyProfile = (): JSX.Element => {
           <ParagraphIcon />
         </span>
 
-        <textarea
-          name="description"
-          onChange={(e) => {
-            setDescription(e.target.value);
-          }}
+        <textarea name="description" 
+        onChange={(e)=>{
+          setCompanyDescription(e.target.value)
+        }}
         />
       </span>
 
       <p className="title">Documents</p>
       <div className="files">
-        <label htmlFor="legal-doc">
+        <label  htmlFor="legal-doc">
           <p className="title">Legal information</p>
-          {legalDoc ? <CheckIcon /> : <UploadIcon />}
-
-          <input
-            id="legal-doc"
-            name="legal-doc"
-            type="file"
-            hidden
-            onChange={legalfileHandler}
-          ></input>
+          <input id="legal-doc" name="legal-doc" type="file" hidden
+          onChange={(e)=>{
+fileHandler(e)
+          }}
+          >
+     
+          </input>
+          <UploadIcon/>
+         
         </label>
 
         <label htmlFor="bsn-doc">
           <p className="title">Business information</p>
-          {businessInfoDoc ? <CheckIcon /> : <UploadIcon />}
+          <input id="bsn-doc" name="bsn-doc" hidden type="file" onChange={(e)=>{
+fileHandler(e)
 
-          <input
-            id="bsn-doc"
-            name="bsn-doc"
-            hidden
-            type="file"
-            onChange={bnsfileHandler}
-          ></input>
+          }} >
+        
+          </input>
+          <UploadIcon/>
+          
         </label>
       </div>
 
@@ -112,13 +100,12 @@ export const CompanyProfile = (): JSX.Element => {
             <PublicIcon />
           </span>
 
-          <input
-            placeholder="1000000"
-            type="number"
-            maxLength={12}
-            onChange={(e) => {
-              setPublicShares(e?.target.value);
-            }}
+          <input placeholder="1000000" type="number" maxLength={12}
+          
+          onChange={(e)=>{
+            setPublicShares(e?.target.value)
+
+          }}
           />
         </div>
 
@@ -128,18 +115,31 @@ export const CompanyProfile = (): JSX.Element => {
             <PublicIcon />
           </span>
 
-          <input
-            placeholder="1000000"
-            type="number"
-            maxLength={12}
-            onChange={(e) => {
-              setValuePerShare(e.target.value);
-            }}
+          <input placeholder="1000000" type="number" maxLength={12} 
+          
+          onChange={(e)=>{
+setValuePerShare(e.target.value)
+          }}
           />
         </div>
       </div>
 
-      <button className="submit" onClick={() => {}}>
+      <button className="submit"
+      onClick={()=>{
+  
+      
+     
+       createCompany({
+        companyName,
+description,
+legalDoc,
+businessInfoDoc,
+publicShares
+       })
+ 
+
+      }}
+      >
         <p>Get started</p>
         <ArrowIcon />
       </button>
