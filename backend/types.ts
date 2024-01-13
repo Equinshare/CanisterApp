@@ -9,6 +9,9 @@ import {
   float32,
 } from "azle";
 
+
+
+
 export type User = Record<{
   id: string;
 }>;
