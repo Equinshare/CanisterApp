@@ -10,6 +10,7 @@ import {
 import { colors } from "../../assets/colors";
 import "../../styles/components/auth/profile.scss";
 import { useCreateCompany } from "../../state/state";
+import { createCompany } from "../../juno/config";
 
 export const CompanyProfile = (): JSX.Element => {
 const {setCompanyName, setCompanyDescription,setFiles,setPublicShares, setValuePerShare, setLegalDoc,setBusinessInfoDoc,
@@ -125,7 +126,18 @@ setValuePerShare(e.target.value)
 
       <button className="submit"
       onClick={()=>{
-       
+  
+      
+     
+       createCompany({
+        companyName,
+description,
+legalDoc,
+businessInfoDoc,
+publicShares
+       })
+ 
+
       }}
       >
         <p>Get started</p>
