@@ -37,86 +37,88 @@ export default function Auth(): JSX.Element {
   };
 
   return (
-    <section className="main">
-      <div className="left_sect">
-        {curridx == 0 && (
-          <Carousel
-            dptext={carouselcontent[0]?.dptext}
-            icon={carouselcontent[0]?.icon}
-          />
-        )}
+    <>
+      <section className="main">
+        <div className="left_sect">
+          {curridx == 0 && (
+            <Carousel
+              dptext={carouselcontent[0]?.dptext}
+              icon={carouselcontent[0]?.icon}
+            />
+          )}
 
-        {curridx == 1 && (
-          <Carousel
-            dptext={carouselcontent[1]?.dptext}
-            icon={carouselcontent[1]?.icon}
-          />
-        )}
+          {curridx == 1 && (
+            <Carousel
+              dptext={carouselcontent[1]?.dptext}
+              icon={carouselcontent[1]?.icon}
+            />
+          )}
 
-        {curridx == 2 && (
-          <Carousel
-            dptext={carouselcontent[2]?.dptext}
-            icon={carouselcontent[2]?.icon}
-          />
-        )}
+          {curridx == 2 && (
+            <Carousel
+              dptext={carouselcontent[2]?.dptext}
+              icon={carouselcontent[2]?.icon}
+            />
+          )}
 
-        <div className="chevrons_">
-          <button onClick={onscrolltoprev}>
-            <ChevronLeftIcon />
-          </button>
+          <div className="chevrons_">
+            <button onClick={onscrolltoprev}>
+              <ChevronLeftIcon />
+            </button>
 
-          {carouselcontent.map((cntnt, idx) => (
-            <div
-              className="indicator_"
+            {carouselcontent.map((cntnt, idx) => (
+              <div
+                className="indicator_"
+                style={{
+                  backgroundColor:
+                    curridx == idx ? colors.text_primary : colors.secondary,
+                }}
+              />
+            ))}
+
+            <button onClick={onscrolltonext}>
+              <ChevronRightIcon />
+            </button>
+          </div>
+        </div>
+
+        <div className="right_sect">
+          <button className="inv_" onClick={() => setacctype("inv")}>
+            <span className="writeup">
+              <p className="title">Start as an Investor</p>
+              <p className="description">
+                Extend your portfolio by accessing a wide range of investment
+                opportunities
+              </p>
+            </span>
+
+            <span
+              className="radio"
               style={{
                 backgroundColor:
-                  curridx == idx ? colors.text_primary : colors.secondary,
+                  acctype == "inv" ? colors.text_secondary : "transparent",
               }}
             />
-          ))}
-
-          <button onClick={onscrolltonext}>
-            <ChevronRightIcon />
           </button>
-        </div>
-      </div>
 
-      <div className="right_sect">
-        <button className="inv_" onClick={() => setacctype("inv")}>
-          <span className="writeup">
-            <p className="title">Start as an Investor</p>
-            <p className="description">
-              Extend your portfolio by accessing a wide range of investment
-              opportunities
-            </p>
-          </span>
+          <button onClick={() => setacctype("bns")}>
+            <span className="writeup">
+              <p className="title">Start as a Company</p>
+              <p className="description">
+                Unlock unprecedented access to global investors, democratise
+                ownership
+              </p>
+            </span>
 
-          <span
-            className="radio"
-            style={{
-              backgroundColor:
-                acctype == "inv" ? colors.text_secondary : "transparent",
-            }}
-          />
-        </button>
+            <span
+              className="radio"
+              style={{
+                backgroundColor:
+                  acctype == "bns" ? colors.text_secondary : "transparent",
+              }}
+            />
+          </button>
 
-        <button onClick={() => setacctype("bns")}>
-          <span className="writeup">
-            <p className="title">Start as a Company</p>
-            <p className="description">
-              Unlock unprecedented access to global investors, democratise
-              ownership
-            </p>
-          </span>
-
-          <span
-            className="radio"
-            style={{
-              backgroundColor:
-                acctype == "bns" ? colors.text_secondary : "transparent",
-            }}
-          />
-        </button>
 
         <button
          // disabled={acctype == "" ? true : false}
@@ -130,6 +132,7 @@ export default function Auth(): JSX.Element {
           <ArrowIcon />
         </button>
       </div>
-    </section>
+    </section
+         
   );
 }
