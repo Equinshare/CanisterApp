@@ -117,7 +117,7 @@ export default function Auth(): JSX.Element {
           </button>
 
           <button
-            disabled={acctype == "" ? true : false}
+            // disabled={acctype == "" ? true : false}
             className="signin"
             style={{ cursor: acctype == "" ? "not-allowed" : "pointer" }}
           >
