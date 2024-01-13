@@ -11,10 +11,11 @@ import {
 import { colors } from "../assets/colors";
 import "../styles/screens/auth.scss";
 import { signIn } from "@junobuild/core";
-
+import { useNavigate } from "react-router-dom";
 
 
 export default function Auth(): JSX.Element {
+  const navigation=useNavigate()
   const [curridx, setcurridx] = useState<number>(0);
   const [acctype, setacctype] = useState<string>("");
 
@@ -123,8 +124,15 @@ export default function Auth(): JSX.Element {
         <button
          // disabled={acctype == "" ? true : false}
           className="signin"
-          onClick={async ()=>{
-            await signIn();
+          onClick={ ()=>{
+
+
+           signIn().then((data)=>{
+            navigation("onBoarding")
+           }).catch((e)=>{
+            //
+           })
+            
           }}
           style={{ cursor: acctype == "" ? "not-allowed" : "pointer" }}
         >
@@ -132,7 +140,8 @@ export default function Auth(): JSX.Element {
           <ArrowIcon />
         </button>
       </div>
-    </section
+    </section>
+    </>
          
   );
 }

@@ -4,6 +4,8 @@ import { initilizeJuno } from "./juno/config";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Auth from "./screens/Auth";
 import "./styles/index.scss";
+import HomeScreen from "./screens/Onboarding";
+
 
 
 function App(): JSX.Element {
@@ -14,6 +16,7 @@ initilizeJuno()
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Auth />} />
+        <Route path="/onBoarding" element={<HomeScreen/>}/>
       </Routes>
     </BrowserRouter>
   );

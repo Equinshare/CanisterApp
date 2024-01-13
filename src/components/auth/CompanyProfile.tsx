@@ -6,10 +6,13 @@ import {
   UploadIcon,
   CheckIcon,
 } from "../../assets/icons";
+
 import { colors } from "../../assets/colors";
 import "../../styles/components/auth/profile.scss";
+import { useCreateCompany } from "../../state/state";
 
 export const CompanyProfile = (): JSX.Element => {
+const {setCompanyName, setCompanyDescription,setFiles,setPublicShares, setLegalDoc,setBusinessInfoDoc}=useCreateCompany((state:any)=>state)
   return (
     <div className="companyprofile">
       <span className="top">
@@ -22,6 +25,10 @@ export const CompanyProfile = (): JSX.Element => {
         className="companyname"
         placeholder="Company name"
         max={128}
+        onChange={(e)=>{
+          setCompanyName(e.target.value)
+
+        }}
       />
 
       <span id="companydescription">
@@ -31,7 +38,9 @@ export const CompanyProfile = (): JSX.Element => {
           <ParagraphIcon />
         </span>
 
-        <textarea name="description" />
+        <textarea name="description" 
+        
+        />
       </span>
 
       <p className="title">Documents</p>
