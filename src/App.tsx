@@ -1,23 +1,25 @@
 import { JSX, useEffect } from "react";
 import { initilizeJuno } from "./juno/config";
-
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Auth from "./screens/Auth";
+import Onboarding from "./screens/Onboarding";
+import Home from "./screens/Home";
+import { Account } from "./components/global/Account";
 import "./styles/index.scss";
-import HomeScreen from "./screens/Onboarding";
-
-
 
 function App(): JSX.Element {
-  useEffect(()=>{
-initilizeJuno()
-  },[])
+  useEffect(() => {
+    initilizeJuno();
+  }, []);
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Auth />} />
-        <Route path="/onBoarding" element={<HomeScreen/>}/>
+        <Route path="/onboarding" element={<Onboarding />} />
+        <Route path="/home" element={<Home />} />
       </Routes>
+
+      <Account />
     </BrowserRouter>
   );
 }

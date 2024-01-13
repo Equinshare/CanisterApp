@@ -13,9 +13,8 @@ import "../styles/screens/auth.scss";
 import { signIn } from "@junobuild/core";
 import { useNavigate } from "react-router-dom";
 
-
 export default function Auth(): JSX.Element {
-  const navigation=useNavigate()
+  const navigation = useNavigate();
   const [curridx, setcurridx] = useState<number>(0);
   const [acctype, setacctype] = useState<string>("");
 
@@ -69,6 +68,7 @@ export default function Auth(): JSX.Element {
 
             {carouselcontent.map((cntnt, idx) => (
               <div
+                key={idx}
                 className="indicator_"
                 style={{
                   backgroundColor:
@@ -120,28 +120,25 @@ export default function Auth(): JSX.Element {
             />
           </button>
 
-
-        <button
-         // disabled={acctype == "" ? true : false}
-          className="signin"
-          onClick={ ()=>{
-navigation("onBoarding")
-
-           signIn().then((data)=>{
-            navigation("onBoarding")
-           }).catch((e)=>{
-            //
-           })
-            
-          }}
-          style={{ cursor: acctype == "" ? "not-allowed" : "pointer" }}
-        >
-          <span>Sign in with internet identity</span>
-          <ArrowIcon />
-        </button>
-      </div>
-    </section>
+          <button
+            // disabled={acctype == "" ? true : false}
+            className="signin"
+            onClick={() => {
+              signIn()
+                .then((data) => {
+                  navigation("onBoarding");
+                })
+                .catch((e) => {
+                  //
+                });
+            }}
+            style={{ cursor: acctype == "" ? "not-allowed" : "pointer" }}
+          >
+            <span>Sign in with internet identity</span>
+            <ArrowIcon />
+          </button>
+        </div>
+      </section>
     </>
-         
   );
 }

@@ -1,4 +1,5 @@
 import { JSX } from "react";
+import { useCreateCompany } from "../../state/state";
 import {
   ArrowIcon,
   ParagraphIcon,
@@ -6,31 +7,42 @@ import {
   UploadIcon,
   CheckIcon,
 } from "../../assets/icons";
-
-import { colors } from "../../assets/colors";
 import "../../styles/components/auth/profile.scss";
-import { useCreateCompany } from "../../state/state";
 
 export const CompanyProfile = (): JSX.Element => {
-const {setCompanyName, setCompanyDescription,setFiles,setPublicShares, setValuePerShare, setLegalDoc,setBusinessInfoDoc,
-companyName,
-description,
-legalDoc,
-businessInfoDoc,
-publicShares
+  const {
+    setCompanyName,
+    setDescription,
+    setPublicShares,
+    setValuePerShare,
+    setLegalDoc,
+    setBusinessInfoDoc,
+    companyName,
+    description,
+    legalDoc,
+    businessInfoDoc,
+    publicShares,
+    valuePerShare,
+  } = useCreateCompany((state: any) => state);
 
-
-
-}=useCreateCompany((state:any)=>state)
-
-
-const fileHandler=(e)=>{
-  const reader= new FileReader();
-  reader.onload=()=>{
-    if(reader.readyState===2)setBusinessInfoDoc(reader.result)
+  const legalfileHandler = (e) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.readyState === 2) console.log(reader.result);
+    };
+    reader.readAsDataURL(e.target.files[0]);
+    setLegalDoc(e.target.files[0]);
   };
 
-}
+  const bnsfileHandler = (e) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.readyState === 2) console.log(reader.result);
+    };
+    reader.readAsDataURL(e.target.files[0]);
+    setBusinessInfoDoc(e.target.files[0]);
+  };
+
   return (
     <div className="companyprofile">
       <span className="top">
@@ -43,9 +55,8 @@ const fileHandler=(e)=>{
         className="companyname"
         placeholder="Company name"
         max={128}
-        onChange={(e)=>{
-          setCompanyName(e.target.value)
-
+        onChange={(e) => {
+          setCompanyName(e.target.value);
         }}
       />
 
@@ -56,38 +67,40 @@ const fileHandler=(e)=>{
           <ParagraphIcon />
         </span>
 
-        <textarea name="description" 
-        onChange={(e)=>{
-          setCompanyDescription(e.target.value)
-        }}
+        <textarea
+          name="description"
+          onChange={(e) => {
+            setDescription(e.target.value);
+          }}
         />
       </span>
 
       <p className="title">Documents</p>
       <div className="files">
-        <label  htmlFor="legal-doc">
+        <label htmlFor="legal-doc">
           <p className="title">Legal information</p>
-          <input id="legal-doc" name="legal-doc" type="file" hidden
-          onChange={(e)=>{
-fileHandler(e)
-          }}
-          >
-     
-          </input>
-          <UploadIcon/>
-         
+          {legalDoc ? <CheckIcon /> : <UploadIcon />}
+
+          <input
+            id="legal-doc"
+            name="legal-doc"
+            type="file"
+            hidden
+            onChange={legalfileHandler}
+          ></input>
         </label>
 
         <label htmlFor="bsn-doc">
           <p className="title">Business information</p>
-          <input id="bsn-doc" name="bsn-doc" hidden type="file" onChange={(e)=>{
-fileHandler(e)
+          {businessInfoDoc ? <CheckIcon /> : <UploadIcon />}
 
-          }} >
-        
-          </input>
-          <UploadIcon/>
-          
+          <input
+            id="bsn-doc"
+            name="bsn-doc"
+            hidden
+            type="file"
+            onChange={bnsfileHandler}
+          ></input>
         </label>
       </div>
 
@@ -99,12 +112,13 @@ fileHandler(e)
             <PublicIcon />
           </span>
 
-          <input placeholder="1000000" type="number" maxLength={12}
-          
-          onChange={(e)=>{
-            setPublicShares(e?.target.value)
-
-          }}
+          <input
+            placeholder="1000000"
+            type="number"
+            maxLength={12}
+            onChange={(e) => {
+              setPublicShares(e?.target.value);
+            }}
           />
         </div>
 
@@ -114,20 +128,18 @@ fileHandler(e)
             <PublicIcon />
           </span>
 
-          <input placeholder="1000000" type="number" maxLength={12} 
-          
-          onChange={(e)=>{
-setValuePerShare(e.target.value)
-          }}
+          <input
+            placeholder="1000000"
+            type="number"
+            maxLength={12}
+            onChange={(e) => {
+              setValuePerShare(e.target.value);
+            }}
           />
         </div>
       </div>
 
-      <button className="submit"
-      onClick={()=>{
-       
-      }}
-      >
+      <button className="submit" onClick={() => {}}>
         <p>Get started</p>
         <ArrowIcon />
       </button>
