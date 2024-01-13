@@ -1,6 +1,5 @@
 import { JSX, useState } from "react";
 import { Carousel } from "../components/auth/Carousel";
-import { CompanyProfile } from "../components/auth/CompanyProfile";
 import {
   ArrowIcon,
   ChevronLeftIcon,
@@ -127,8 +126,6 @@ export default function Auth(): JSX.Element {
           </button>
         </div>
       </section>
-
-      <CompanyProfile />
     </>
   );
 }
