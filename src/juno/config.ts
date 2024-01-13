@@ -18,7 +18,7 @@ export const createCompany= async(data)=>{
 
 try{
    const res=  await setDoc({
-    collection: import.meta.env.VITE_COMPANIES_COLLECTION,
+    collection: "users",
     doc: {
       key: document_key,
       data

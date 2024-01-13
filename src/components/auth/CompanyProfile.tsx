@@ -18,7 +18,8 @@ companyName,
 description,
 legalDoc,
 businessInfoDoc,
-publicShares
+publicShares,
+valuePerShare
 
 
 
@@ -134,7 +135,8 @@ setValuePerShare(e.target.value)
 description,
 legalDoc,
 businessInfoDoc,
-publicShares
+publicShares,
+valuePerShare
        })
  
 
