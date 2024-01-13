@@ -12,14 +12,14 @@ import "../../styles/components/auth/profile.scss";
 import { useCreateCompany } from "../../state/state";
 
 export const CompanyProfile = (): JSX.Element => {
-const {setCompanyName, setCompanyDescription,setFiles,setPublicShares, setLegalDoc,setBusinessInfoDoc}=useCreateCompany((state:any)=>state)
+const {setCompanyName, setCompanyDescription,setFiles,setPublicShares, setLegalDoc,setBusinessInfoDoc, setValuePerShare}=useCreateCompany((state:any)=>state)
   return (
     <div className="companyprofile">
       <span className="top">
         <p className="title">Create your company profile</p>
         <div className="divider" />
       </span>
-
+       
       <input
         type="text"
         className="companyname"
@@ -39,19 +39,30 @@ const {setCompanyName, setCompanyDescription,setFiles,setPublicShares, setLegalD
         </span>
 
         <textarea name="description" 
-        
+         OnChange={(e) =>{
+          setCompanyDescription(e.target.value)
+
+         }}
         />
       </span>
 
       <p className="title">Documents</p>
       <div className="files">
         <span>
-          <p className="title">Legal information</p>
+          <input type="file" className="title"
+          onChange={ (e)  =>{
+            setLegalDoc(e.target.files[0])
+          }}
+          > Legal Information </input>
           <UploadIcon />
         </span>
 
         <span>
-          <p className="title">Business information</p>
+          <input type="file" className="title" 
+          onChange={ (e) =>{
+            setBusinessInfoDoc(e.target.files[0])
+          }}
+          >Business information</input>
           <UploadIcon />
         </span>
       </div>
@@ -64,7 +75,11 @@ const {setCompanyName, setCompanyDescription,setFiles,setPublicShares, setLegalD
             <PublicIcon />
           </span>
 
-          <input placeholder="1000000" type="number" maxLength={12} />
+          <input placeholder="1000000" type="number" maxLength={3} 
+          onChange={ (e) =>{
+             setPublicShares(e.target.value)
+          }}
+          />
         </div>
 
         <div>
@@ -73,7 +88,11 @@ const {setCompanyName, setCompanyDescription,setFiles,setPublicShares, setLegalD
             <PublicIcon />
           </span>
 
-          <input placeholder="1000000" type="number" maxLength={12} />
+          <input placeholder="1000000" type="number" maxLength={12} 
+          onChange={ (e) =>{
+            setValuePerShare(e.target.value)
+          }}
+          />
         </div>
       </div>
 
