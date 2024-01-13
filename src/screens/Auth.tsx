@@ -10,6 +10,9 @@ import {
 } from "../assets/icons";
 import { colors } from "../assets/colors";
 import "../styles/screens/auth.scss";
+import { signIn } from "@junobuild/core";
+
+
 
 export default function Auth(): JSX.Element {
   const [curridx, setcurridx] = useState<number>(0);
@@ -116,16 +119,20 @@ export default function Auth(): JSX.Element {
             />
           </button>
 
-          <button
-            // disabled={acctype == "" ? true : false}
-            className="signin"
-            style={{ cursor: acctype == "" ? "not-allowed" : "pointer" }}
-          >
-            <span>Sign in with internet identity</span>
-            <ArrowIcon />
-          </button>
-        </div>
-      </section>
-    </>
+
+        <button
+         // disabled={acctype == "" ? true : false}
+          className="signin"
+          onClick={async ()=>{
+            await signIn();
+          }}
+          style={{ cursor: acctype == "" ? "not-allowed" : "pointer" }}
+        >
+          <span>Sign in with internet identity</span>
+          <ArrowIcon />
+        </button>
+      </div>
+    </section
+         
   );
 }
