@@ -56,7 +56,7 @@
 
   .right_sect {
     width: calc(100vw - 38%);
-    @include flexmixin(column, no-wrap, flex-start, flex-start, 0);
+    @include flexmixin(column, no-wrap, flex-end, flex-start, 0);
 
     .inv_ {
       margin-top: 4rem;
@@ -65,9 +65,10 @@
 
     button {
       width: 65%;
-      height: 4rem;
+      height: 4.25rem;
       padding: 0.75rem;
       border: 0;
+      margin-right: 16rem;
       border-radius: 0.5rem;
       outline: none;
       outline-color: transparent;
@@ -82,9 +83,11 @@
 
       .writeup {
         .title {
+          margin-bottom: 0.25rem;
           font-size: 1rem;
           color: $text_primary;
         }
+
         .description {
           font-size: 0.875rem;
           color: $text_secondary;
@@ -107,8 +110,8 @@
       justify-content: center;
       gap: 0.75rem;
       background-color: $secondary;
-      border: 1px solid $divider;
-      font-size: 1rem;
+      border: 0.5px solid $divider;
+      font-size: 0.875rem;
       color: $text_primary;
     }
   }
