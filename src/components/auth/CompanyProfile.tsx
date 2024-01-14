@@ -12,6 +12,7 @@ import "../../styles/components/auth/profile.scss";
 import { useCreateCompany } from "../../state/state";
 import { createCompany } from "../../juno/config";
 import { useNavigate } from "react-router-dom";
+import { tokenize } from "../../juno/config";
 
 export const CompanyProfile = (): JSX.Element => {
 
@@ -137,7 +138,8 @@ description,
 legalDoc,
 businessInfoDoc,
 publicShares,
-valuePerShare
+valuePerShare,
+tokens:tokenize(valuePerShare,publicShares)
        }).then((data)=>{
         
 navigation(`/home/${data?.key}`)

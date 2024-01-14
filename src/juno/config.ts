@@ -2,9 +2,6 @@ import { initJuno } from "@junobuild/core";
 import { setDoc } from "@junobuild/core";
 import { nanoid } from "nanoid";
 
-
-
-
 const document_key = nanoid();
 
 export const initilizeJuno=async ()=>{
@@ -62,6 +59,10 @@ export const createInvestor= async(data)=>{
     }
     
 
-    const tokenize= ()=>{
-
+   export const tokenize= (valuePerShare, numberOfShares)=>{
+      const totalValue= valuePerShare*numberOfShares;
+      const tokenPrice=12;
+      const totalTokens= totalValue/12;
+      return totalTokens;
+      
     }

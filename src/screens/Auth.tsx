@@ -14,6 +14,8 @@ import { signIn } from "@junobuild/core";
 import { useNavigate } from "react-router-dom";
 import { useCreateCompany } from "../state/state";
 
+
+
 export default function Auth(): JSX.Element {
   const{setId,id}=useCreateCompany((state:any)=>state);
   const navigation = useNavigate();
