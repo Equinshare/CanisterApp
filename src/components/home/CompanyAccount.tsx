@@ -7,6 +7,7 @@ import {
 } from "../../assets/icons";
 import "../../styles/components/home/companyaccount.scss";
 
+
 export const CompanyAccount = (): JSX.Element => {
   return (
     <div className="companyaccount">

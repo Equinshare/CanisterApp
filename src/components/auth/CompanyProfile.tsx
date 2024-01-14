@@ -1,4 +1,4 @@
-import { JSX } from "react";
+import { JSX, useState } from "react";
 import {
   ArrowIcon,
   ParagraphIcon,
@@ -11,8 +11,11 @@ import { colors } from "../../assets/colors";
 import "../../styles/components/auth/profile.scss";
 import { useCreateCompany } from "../../state/state";
 import { createCompany } from "../../juno/config";
+import { useNavigate } from "react-router-dom";
+import { tokenize } from "../../juno/config";
 
 export const CompanyProfile = (): JSX.Element => {
+
 const {setCompanyName, setCompanyDescription,setFiles,setPublicShares, setValuePerShare, setLegalDoc,setBusinessInfoDoc,
 companyName,
 description,
@@ -24,7 +27,7 @@ valuePerShare
 
 
 }=useCreateCompany((state:any)=>state)
-
+const navigation=useNavigate()
 
 const fileHandler=(e)=>{
   const reader= new FileReader();
@@ -129,14 +132,17 @@ setValuePerShare(e.target.value)
       onClick={()=>{
   
       
-     
-       createCompany({
+    createCompany({
         companyName,
 description,
 legalDoc,
 businessInfoDoc,
 publicShares,
-valuePerShare
+valuePerShare,
+tokens:tokenize(valuePerShare,publicShares)
+       }).then((data)=>{
+        
+navigation(`/home/${data?.key}`)
        })
  
 

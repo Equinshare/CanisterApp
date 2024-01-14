@@ -12,8 +12,12 @@ import { colors } from "../assets/colors";
 import "../styles/screens/auth.scss";
 import { signIn } from "@junobuild/core";
 import { useNavigate } from "react-router-dom";
+import { useCreateCompany } from "../state/state";
+
+
 
 export default function Auth(): JSX.Element {
+  const{setId,id}=useCreateCompany((state:any)=>state);
   const navigation = useNavigate();
   const [curridx, setcurridx] = useState<number>(0);
   const [acctype, setacctype] = useState<string>("");
@@ -124,9 +128,11 @@ export default function Auth(): JSX.Element {
             // disabled={acctype == "" ? true : false}
             className="signin"
             onClick={() => {
-              navigation("onBoarding");
+             
               signIn()
                 .then((data) => {
+                  console.log(JSON.stringify(data))
+                  setId(data)
                   navigation("onBoarding");
                 })
                 .catch((e) => {
