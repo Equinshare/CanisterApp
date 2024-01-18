@@ -2,6 +2,7 @@ import { initJuno } from "@junobuild/core";
 import { setDoc } from "@junobuild/core";
 import { nanoid } from "nanoid";
 import { handleError } from "../util";
+import { Company, Investor } from "../state/state";
 
 const document_key = nanoid();
 
@@ -11,7 +12,7 @@ export const initilizeJuno = async () => {
   });
 };
 
-export const createCompany = async (data) => {
+export const createCompany = async (data: Company) => {
   try {
     const res = await setDoc({
       collection: "users",
@@ -28,7 +29,7 @@ export const createCompany = async (data) => {
   }
 };
 
-export const createInvestor = async (data) => {
+export const createInvestor = async (data: Investor) => {
   try {
     await setDoc({
       collection: import.meta.env.VITE_INVESTORS_COLLECTION,
@@ -42,7 +43,10 @@ export const createInvestor = async (data) => {
   }
 };
 
-export const tokenize = (valuePerShare, numberOfShares) => {
+export const tokenize = (
+  valuePerShare: number,
+  numberOfShares: number,
+): number => {
   const totalValue = valuePerShare * numberOfShares;
   const tokenPrice = 12;
   const totalTokens = totalValue / 12;
